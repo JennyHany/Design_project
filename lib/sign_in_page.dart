@@ -63,7 +63,7 @@ class SignInPage extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/foodHome'); // Navigate to FoodHomePage
+                    Navigator.pushNamed(context, '/foodHome'); // ashan yerouh lel homepage bas mesh 3arfa law it worked
                   },
                   child: Text(
                     'LOGIN',
