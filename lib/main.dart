@@ -13,7 +13,8 @@ void main() {
     routes: {
       '/': (context) => Splash(),
       '/obs': (context) => const OnboardingScreen(),
-      '/signup': (context) => const SignUpScreen(), // Add your sign-up page route
+      '/signup': (context) => const SignUpScreen(), 
+      '/foodHome': (context) => FoodHomePage(), //joujou check this law maktouba sah
     },
   ));
 }
