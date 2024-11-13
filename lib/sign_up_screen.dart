@@ -169,6 +169,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Processing Data')),
                         );
+                        Navigator.pushNamed(context, '/signin');
                       }
                     },
                     child: const Text(
@@ -186,7 +187,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   children: [
                     const Text('Already have an account?'),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/signin'); // Navigate to Sign In
+                      },
                       child: const Text(
                         'Login',
                         style: TextStyle(
