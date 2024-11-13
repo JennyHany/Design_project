@@ -14,7 +14,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>{
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> _onBoardingScreens = [
+    List<Widget> onBoardingScreens = [
       OnboardingCard(
         image: "assets/screen3.2.png",
         title: "Don't know what to eat?",
@@ -58,7 +58,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>{
               // SmoothPageIndicator at the top of the page
               SmoothPageIndicator(
                 controller: _pageController,
-                count: _onBoardingScreens.length,
+                count: onBoardingScreens.length,
                 effect: ExpandingDotsEffect(
                   activeDotColor: Colors.red[400]!,
                   dotColor: Colors.red[200]!,
@@ -76,7 +76,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>{
               Expanded(
                 child: PageView(
                   controller: _pageController,
-                  children: _onBoardingScreens,
+                  children: onBoardingScreens,
                 ),
               ),
             ],

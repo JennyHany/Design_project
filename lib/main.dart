@@ -12,8 +12,8 @@ void main() {
     debugShowCheckedModeBanner: false,
     routes: {
       '/': (context) => Splash(),
-      '/obs': (context) => OnboardingScreen(),
-      '/signup': (context) => SignUpScreen(), // Add your sign-up page route
+      '/obs': (context) => const OnboardingScreen(),
+      '/signup': (context) => const SignUpScreen(), // Add your sign-up page route
     },
   ));
 }
