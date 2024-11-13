@@ -60,6 +60,9 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - assets/screen2.1.png
+    - assets/screen3.2.png
+    - assets/loc.png
     - assets/steak.png
     - assets/shrimp.png
     - assets/ham.png
@@ -198,6 +201,7 @@ flutter:
     - assets/hot chocolate.png
     - assets/chai latte.png
     - assets/cappuccino.png
+    - assets/splash_animation.json
 
 
 
