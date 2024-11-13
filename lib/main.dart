@@ -12,6 +12,7 @@ class FoodApp extends StatelessWidget {
     return MaterialApp(
       title: 'Food App',
       theme: ThemeData(primarySwatch: Colors.green),
+      debugShowCheckedModeBanner: false,
       home: FoodHomePage(),
     );
   }
