@@ -19,17 +19,17 @@ class FoodDetailPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.asset(foodItem.imageUrl, height: 200, width:400, fit: BoxFit.cover),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 foodItem.description,
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
-              SizedBox(height: 16),
-              Text(
+              const SizedBox(height: 16),
+              const Text(
                 'Available Variants:',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               ..._getVariants(foodItem),
             ],
           ),
@@ -250,26 +250,26 @@ class FoodDetailPage extends StatelessWidget {
           _foodVariantCard('Piccata Mushroom Steak', 'chicken cooked with white wine, lemon juice, and butter', 14.99, 'assets/piccata mushroom steak.png'),
         ];
       default:
-        return [Text('No variants available.')];
+        return [const Text('No variants available.')];
     }
   }
 
   Widget _foodVariantCard(String name, String description, double price, String imageUrl) {
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 8),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
             Image.asset(imageUrl, height: 70, width: 70, fit: BoxFit.cover),
-            SizedBox(width: 20),
+            const SizedBox(width: 20),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(name, style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
                   Text(description),
-                  Text('\$${price.toStringAsFixed(2)}', style: TextStyle(color: Colors.green)),
+                  Text('\$${price.toStringAsFixed(2)}', style: const TextStyle(color: Colors.green)),
                 ],
               ),
             ),

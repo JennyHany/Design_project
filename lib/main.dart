@@ -1,12 +1,19 @@
+import 'package:design_project_homepage/shopping_cart_page.dart';
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'food_item.dart';
-import 'food_detail_page.dart';  // Import the FoodDetailPage
+import 'food_detail_page.dart'; // Import the FoodDetailPage
 
 void main() {
   runApp(FoodApp());
 }
 
-class FoodApp extends StatelessWidget {
+class FoodApp extends StatefulWidget {
+  @override
+  State<FoodApp> createState() => _FoodAppState();
+}
+
+class _FoodAppState extends State<FoodApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,7 +25,34 @@ class FoodApp extends StatelessWidget {
   }
 }
 
-class FoodHomePage extends StatelessWidget {
+class FoodHomePage extends StatefulWidget {
+  @override
+  State<FoodHomePage> createState() => _FoodHomePageState();
+}
+
+class _FoodHomePageState extends State<FoodHomePage> {
+  int currentPageIndex = 0;
+
+  NavigationDestinationLabelBehavior labelBehavior =
+      NavigationDestinationLabelBehavior.onlyShowSelected;
+  void navigateToPage(int index) {
+    setState(() {
+      currentPageIndex = index;
+    });
+
+    // Check if the Cart tab (index 1) is selected
+    if (index == 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => CartScreen()),
+      ).then((_) {
+        setState(() {
+          currentPageIndex = 0;
+        });
+      });
+    }
+  }
+
   final List<FoodItem> mainCourseItems = [
     FoodItem(
       name: 'Pizza',
@@ -232,8 +266,6 @@ class FoodHomePage extends StatelessWidget {
     ),
   ];
 
-
-
   final List<FoodItem> recommendedPlatesItems = [
     FoodItem(
       name: 'Honey Mustard Chicken',
@@ -252,20 +284,45 @@ class FoodHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: GNav(
+        gap: 5,
+        iconSize: 26,
+        selectedIndex: currentPageIndex,
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        activeColor: Colors.deepPurple,
+        onTabChange: (index) {
+          navigateToPage(index);
+        },
+        tabs: const [
+          GButton(
+            icon: Icons.home,
+            text: 'Home',
+          ),
+          GButton(
+            icon: Icons.shopping_cart_rounded,
+            text: 'Cart',
+          ),
+          GButton(
+            icon: Icons.person,
+            text: 'Account',
+          )
+        ],
+      ),
       appBar: AppBar(
-        title: Text('Welcome to FoodApp'),
+        title: const Text('Welcome to FoodApp'),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: Colors.red,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Row(
+                  child: const Row(
                     children: [
                       Icon(Icons.location_on, color: Colors.white),
                       SizedBox(width: 4),
@@ -288,7 +345,7 @@ class FoodHomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               searchBar(),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               promotionalBanner(),
               sectionTitle("Main Course"),
               foodList(mainCourseItems),
@@ -302,7 +359,6 @@ class FoodHomePage extends StatelessWidget {
               foodList(hotBeveragesItems),
               sectionTitle("Recommended Plates"),
               foodList(recommendedPlatesItems),
-
             ],
           ),
         ),
@@ -316,7 +372,7 @@ class FoodHomePage extends StatelessWidget {
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(12),
       ),
-      child: TextField(
+      child: const TextField(
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: "What are you craving for?",
@@ -331,8 +387,8 @@ class FoodHomePage extends StatelessWidget {
   Widget promotionalBanner() {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(16),
-      margin: EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         color: Colors.red[200],
         borderRadius: BorderRadius.circular(8),
@@ -340,18 +396,24 @@ class FoodHomePage extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Expanded(
+          const Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "Fresh Meat",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
+                  style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
                 SizedBox(height: 4),
                 Text(
                   "20% Off",
-                  style: TextStyle(fontSize: 34, fontWeight: FontWeight.bold, color: Colors.white),
+                  style: TextStyle(
+                      fontSize: 34,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
               ],
             ),
@@ -374,7 +436,7 @@ class FoodHomePage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 22,
           fontWeight: FontWeight.bold,
           color: Colors.green,
@@ -385,7 +447,7 @@ class FoodHomePage extends StatelessWidget {
 
   Widget foodList(List<FoodItem> items) {
     return Container(
-      height: 250,
+      height: 170,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: items.length,
@@ -401,7 +463,7 @@ class FoodHomePage extends StatelessWidget {
               );
             },
             child: Card(
-              margin: EdgeInsets.only(right: 10),
+              margin: const EdgeInsets.only(right: 10),
               child: Column(
                 children: [
                   Image.asset(
@@ -414,7 +476,7 @@ class FoodHomePage extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       item.name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
