@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../widgets/onboarding_card.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -17,7 +16,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>{
   Widget build(BuildContext context) {
     List<Widget> _onBoardingScreens = [
       OnboardingCard(
-        image: "assets/images/screen3.2.png",
+        image: "assets/screen3.2.png",
         title: "Don't know what to eat?",
         description: "",
         buttonText: "Next",
@@ -27,7 +26,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>{
         },
       ),
       OnboardingCard(
-        image: "assets/images/screen2.1.png",
+        image: "assets/screen2.1.png",
         title: "Diverse and fresh food",
         description: "Take a look at all the options we have for you!",
         buttonText: "Next",
@@ -37,7 +36,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>{
         },
       ),
       OnboardingCard(
-        image: "assets/images/loc.png",
+        image: "assets/loc.png",
         title: "Delivered to your exact location",
         description: "Everything you need in one application!",
         buttonText: "Sign up now",
