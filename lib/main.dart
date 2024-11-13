@@ -3,9 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'food_item.dart';
 import 'food_detail_page.dart'; // Import the FoodDetailPage
+import 'pages/onboarding_screen.dart';
+import 'pages/splash.dart';
+import 'sign_up_screen.dart';
 
 void main() {
-  runApp(FoodApp());
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    routes: {
+      '/': (context) => Splash(),
+      '/obs': (context) => OnboardingScreen(),
+      '/signup': (context) => SignUpScreen(), // Add your sign-up page route
+    },
+  ));
 }
 
 class FoodApp extends StatefulWidget {
