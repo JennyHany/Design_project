@@ -47,8 +47,7 @@ class _SplashState extends State<Splash> {
     return Center(
       child: Transform.scale(
         scale: 1.5, // Adjust the scale factor
-        child: Lottie.network(
-            'https://lottie.host/e78c20fe-442b-4f78-bacf-d9006ef53e84/D7ZuP38YCf.json'),
+        child: Lottie.asset('assets/splash_animation.json'),
       ),
     );
   }
