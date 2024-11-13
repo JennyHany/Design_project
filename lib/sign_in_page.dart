@@ -15,7 +15,7 @@ class SignInPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
-                  color: Colors.purple,  // Purple text color
+                  color: Colors.red[400],  // Purple text color
                 ),
               ),
               SizedBox(height: 40),
@@ -23,9 +23,9 @@ class SignInPage extends StatelessWidget {
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Email',
-                  labelStyle: TextStyle(color: Colors.purple),
+                  labelStyle: TextStyle(color: Colors.red[400]),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
+                    borderSide: BorderSide(color: Colors.red),
                   ),
                   border: OutlineInputBorder(),
                 ),
@@ -36,9 +36,9 @@ class SignInPage extends StatelessWidget {
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Password',
-                  labelStyle: TextStyle(color: Colors.purple),
+                  labelStyle: TextStyle(color: Colors.red[400]),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple),
+                    borderSide: BorderSide(color: Colors.red),
                   ),
                   border: OutlineInputBorder(),
                 ),
@@ -53,7 +53,7 @@ class SignInPage extends StatelessWidget {
                   },
                   child: Text(
                     'Forgot password?',
-                    style: TextStyle(color: Colors.purple),
+                    style: TextStyle(color: Colors.red[400]),
                   ),
                 ),
               ),
@@ -63,7 +63,7 @@ class SignInPage extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Handle Sign In
+                    Navigator.pushNamed(context, '/foodHome'); // Navigate to FoodHomePage
                   },
                   child: Text(
                     'LOGIN',
@@ -74,7 +74,7 @@ class SignInPage extends StatelessWidget {
                     ),
                   ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.purple,  // Button background color
+                    backgroundColor: Colors.red[400],  // Button background color
                     padding: EdgeInsets.symmetric(vertical: 16),
                   ),
                 ),
@@ -87,11 +87,11 @@ class SignInPage extends StatelessWidget {
                   Text("Don't have an account?"),
                   TextButton(
                     onPressed: () {
-                      // Navigate to Sign Up
+                      Navigator.pushNamed(context, '/signup'); // Navigate to Sign Up
                     },
                     child: Text(
                       'Sign up',
-                      style: TextStyle(color: Colors.purple),
+                      style: TextStyle(color: Colors.red),
                     ),
                   ),
                 ],
