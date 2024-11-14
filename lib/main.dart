@@ -14,6 +14,7 @@ void main() {
       '/': (context) => Splash(),
       '/obs': (context) => const OnboardingScreen(),
       '/signup': (context) => const SignUpScreen(), 
+      '/signin': (context) => SignInPage(),
       '/foodHome': (context) => FoodHomePage(), //joujou check this law maktouba sah
     },
   ));
