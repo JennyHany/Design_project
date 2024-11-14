@@ -1,4 +1,5 @@
 import 'package:design_project_homepage/shopping_cart_page.dart';
+import 'package:design_project_homepage/sign_in_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'food_item.dart';
@@ -322,6 +323,7 @@ class _FoodHomePageState extends State<FoodHomePage> {
       ),
       appBar: AppBar(
         title: const Text('Welcome to FoodApp'),
+        automaticallyImplyLeading: false,
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
