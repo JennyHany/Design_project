@@ -5,101 +5,110 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Profile"),
-        backgroundColor: Colors.green,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        leading: TextButton(
+          onPressed: () {},
+          child: Text(
+            'Cancel',
+            style: TextStyle(color: Colors.blue, fontSize: 16),
+          ),
+        ),
+        title: Text(
+          'Edit Profile',
+          style: TextStyle(color: Colors.black, fontSize: 18),
+        ),
+        centerTitle: true,
+        actions: [
+          TextButton(
+            onPressed: () {},
+            child: Text(
+              'Save',
+              style: TextStyle(color: Colors.blue, fontSize: 16),
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Profile Picture
-            Center(
-              child: CircleAvatar(
-                radius: 60,
-                backgroundColor: Colors.green,
-                child: const Icon(
-                  Icons.person,
-                  size: 60,
-                  color: Colors.white,
-                ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            children: [
+              SizedBox(height: 20),
+              Stack(
+                children: [
+                  CircleAvatar(
+                    radius: 50,
+                    backgroundImage: NetworkImage(
+                        'https://via.placeholder.com/150'), // Replace with your image URL
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: CircleAvatar(
+                      radius: 15,
+                      backgroundColor: Colors.blue,
+                      child: Icon(
+                        Icons.camera_alt,
+                        size: 15,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
-            const SizedBox(height: 20),
-            // User Information
-            Center(
-              child: Text(
-                "John Doe", // Replace with dynamic user name if needed
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            Center(
-              child: Text(
-                "johndoe@example.com", // Replace with dynamic user email if needed
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey,
-                ),
-              ),
-            ),
-            const SizedBox(height: 30),
-            // Settings Options
-            const Text(
-              "Account Settings",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 10),
-            ListTile(
-              leading: const Icon(Icons.edit, color: Colors.green),
-              title: const Text("Edit Profile"),
-              onTap: () {
-                // Handle Edit Profile action
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.lock, color: Colors.green),
-              title: const Text("Change Password"),
-              onTap: () {
-                // Handle Change Password action
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.history, color: Colors.green),
-              title: const Text("Order History"),
-              onTap: () {
-                // Handle Order History action
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.help, color: Colors.green),
-              title: const Text("Help & Support"),
-              onTap: () {
-                // Handle Help & Support action
-              },
-            ),
-            const SizedBox(height: 20),
-            // Logout Button
-            Center(
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, '/signin');
-                },
-                icon: const Icon(Icons.logout),
-                label: const Text("Log Out"),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                ),
-              ),
-            ),
-          ],
+              SizedBox(height: 30),
+              buildTextField('YOUR EMAIL', 'maysasha@gmail.com'),
+              SizedBox(height: 20),
+              buildTextField('YOUR PASSWORD', '•••••••••••', isObscured: true),
+              SizedBox(height: 20),
+              buildTextField('YOUR PHONE', '+1.415.111.0000'),
+              SizedBox(height: 20),
+              buildTextField('CITY, STATE', 'San Francisco, CA'),
+              SizedBox(height: 20),
+              buildTextField('COUNTRY', 'USA'),
+            ],
+          ),
         ),
       ),
     );
   }
+
+  Widget buildTextField(String label, String value, {bool isObscured = false}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 14,
+            color: Colors.grey,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(height: 8),
+        TextField(
+          obscureText: isObscured,
+          readOnly: true,
+          decoration: InputDecoration(
+            hintText: value,
+            hintStyle: TextStyle(fontSize: 16, color: Colors.black),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+void main() {
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: ProfilePage(),
+  ));
 }
