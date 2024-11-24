@@ -7,6 +7,8 @@ import 'food_detail_page.dart'; // Import the FoodDetailPage
 import 'pages/onboarding_screen.dart';
 import 'pages/splash.dart';
 import 'sign_up_screen.dart';
+import 'profile_page.dart';
+
 
 void main() {
   runApp(MaterialApp(
@@ -14,7 +16,7 @@ void main() {
     routes: {
       '/': (context) => Splash(),
       '/obs': (context) => const OnboardingScreen(),
-      '/signup': (context) => const SignUpScreen(), 
+      '/signup': (context) => const SignUpScreen(),
       '/signin': (context) =>  SignInPage(),
       '/foodHome': (context) => FoodHomePage(), //joujou check this law maktouba sah
     },
@@ -53,7 +55,6 @@ class _FoodHomePageState extends State<FoodHomePage> {
       currentPageIndex = index;
     });
 
-    // Check if the Cart tab (index 1) is selected
     if (index == 1) {
       Navigator.push(
         context,
@@ -63,8 +64,18 @@ class _FoodHomePageState extends State<FoodHomePage> {
           currentPageIndex = 0;
         });
       });
+    } else if (index == 2) { // For the Account tab
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ProfilePage()),
+      ).then((_) {
+        setState(() {
+          currentPageIndex = 0;
+        });
+      });
     }
   }
+
 
   final List<FoodItem> mainCourseItems = [
     FoodItem(
