@@ -5,16 +5,15 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
         backgroundColor: Colors.transparent,
         leading: TextButton(
-          onPressed: () {},
-          child: Text(
+          onPressed: () { Navigator.pop(context);},
+          child: const Text(
             'Cancel',
             style: TextStyle(color: Colors.blue, fontSize: 16),
           ),
         ),
-        title: Text(
+        title: const Text(
           'Edit Profile',
           style: TextStyle(color: Colors.black, fontSize: 18),
         ),
@@ -22,7 +21,7 @@ class ProfilePage extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {},
-            child: Text(
+            child: const Text(
               'Save',
               style: TextStyle(color: Colors.blue, fontSize: 16),
             ),
@@ -34,8 +33,8 @@ class ProfilePage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
             children: [
-              SizedBox(height: 20),
-              Stack(
+              const SizedBox(height: 20),
+              const Stack(
                 children: [
                   CircleAvatar(
                     radius: 50,
@@ -57,15 +56,15 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               buildTextField('YOUR EMAIL', 'maysasha@gmail.com'),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               buildTextField('YOUR PASSWORD', '•••••••••••', isObscured: true),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               buildTextField('YOUR PHONE', '+1.415.111.0000'),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               buildTextField('CITY, STATE', 'San Francisco, CA'),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               buildTextField('COUNTRY', 'USA'),
             ],
           ),
@@ -80,23 +79,23 @@ class ProfilePage extends StatelessWidget {
       children: [
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 14,
             color: Colors.grey,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         TextField(
           obscureText: isObscured,
           readOnly: true,
           decoration: InputDecoration(
             hintText: value,
-            hintStyle: TextStyle(fontSize: 16, color: Colors.black),
-            enabledBorder: UnderlineInputBorder(
+            hintStyle: const TextStyle(fontSize: 16, color: Colors.black),
+            enabledBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),
-            focusedBorder: UnderlineInputBorder(
+            focusedBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),
           ),

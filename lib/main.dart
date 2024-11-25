@@ -1,7 +1,6 @@
 import 'package:design_project_homepage/shopping_cart_page.dart';
 import 'package:design_project_homepage/sign_in_page.dart';
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 import 'food_item.dart';
 import 'food_detail_page.dart'; // Import the FoodDetailPage
 import 'pages/onboarding_screen.dart';
@@ -308,28 +307,26 @@ class _FoodHomePageState extends State<FoodHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: GNav(
-        gap: 5,
-        iconSize: 26,
-        selectedIndex: currentPageIndex,
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-        activeColor: Colors.deepPurple,
-        onTabChange: (index) {
-          navigateToPage(index);
-        },
-        tabs: const [
-          GButton(
-            icon: Icons.home,
-            text: 'Home',
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentPageIndex,
+        onTap: navigateToPage,
+        selectedItemColor: Colors.deepPurple,
+        unselectedItemColor: Colors.grey,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
-          GButton(
-            icon: Icons.shopping_cart_rounded,
-            text: 'Cart',
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart_rounded),
+            label: 'Cart',
           ),
-          GButton(
-            icon: Icons.person,
-            text: 'Account',
-          )
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Account',
+          ),
         ],
       ),
       appBar: AppBar(
