@@ -1,3 +1,4 @@
+import 'package:design_project_homepage/pass_changed_card.dart';
 import 'package:flutter/material.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
@@ -168,11 +169,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       return;
                     }
 
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Password reset successful!")),
-                    );
-
-                    Navigator.pushNamed(context, '/home');
+                    showPasswordChangedDialog(context);
                   },
                   child: const Text(
                     "Verify Account",

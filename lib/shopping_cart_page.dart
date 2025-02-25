@@ -46,13 +46,13 @@ class CartScreen extends StatelessWidget {
         //const SizedBox(height: 30),
         const Text(
           'Ouch! Hungry',
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 33, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 10),
         const Text(
           'Seems like you have not ordered\nany food yet',
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 16, color: Colors.grey),
+          style: TextStyle(fontSize: 17, color: Colors.grey),
         ),
         const SizedBox(height: 40),
         ElevatedButton(
