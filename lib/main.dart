@@ -1,3 +1,4 @@
+import 'package:design_project_homepage/profile_page.dart';
 import 'package:design_project_homepage/reset_pass_screen.dart';
 import 'package:design_project_homepage/shopping_cart_page.dart';
 import 'package:design_project_homepage/sign_in_page.dart';
@@ -21,6 +22,7 @@ void main() {
       '/foodHome': (context) => FoodHomePage(),
         '/otp': (context) => const OTPVerificationScreen(),
       '/reset-password': (context) => const ResetPasswordScreen(),
+      '/profilepage': (context) => ProfilePage(),
 
     },
   ));
@@ -64,6 +66,13 @@ class _FoodHomePageState extends State<FoodHomePage> {
         context,
         MaterialPageRoute(builder: (context) => CartScreen()),
       ).then((_) {
+        setState(() {
+          currentPageIndex = 0;
+        });
+      });
+    }
+    if (index == 2) {
+      Navigator.pushNamed(context, '/profilepage').then((_) {
         setState(() {
           currentPageIndex = 0;
         });
