@@ -31,7 +31,7 @@ class SignInPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              Text(
+              const Text(
                 "Please sign in to your account",
                 style: TextStyle(color: Colors.white70, fontSize: 16),
               ),
@@ -72,7 +72,7 @@ class SignInPage extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ForgotPasswordPage()),
+                      MaterialPageRoute(builder: (context) => const ForgotPasswordPage()),
                     );
                   },
                   child: const Text(

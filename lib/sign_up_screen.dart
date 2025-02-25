@@ -64,8 +64,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             if (value == null || value.isEmpty) {
                               return 'Field cannot be empty';
                             }
-                            if (value.length < 3) {
-                              return 'Name too short!';
+                            if (!EmailValidator.validate(value)) {
+                              return 'Enter a valid email';
                             }
                             return null;
                           },

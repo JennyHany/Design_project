@@ -61,7 +61,7 @@ class OnboardingCard extends StatelessWidget {
               ),
               minWidth: 250,  // Set the minimum width to make it longer horizontally
               height: 50,     // Set the height to adjust the vertical size
-              padding: EdgeInsets.symmetric(horizontal: 0.0),  // Add horizontal padding for more width
+              padding: const EdgeInsets.symmetric(horizontal: 0.0),  // Add horizontal padding for more width
               child: Text(
                 buttonText,
                 style: const TextStyle(
