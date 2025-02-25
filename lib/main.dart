@@ -1,13 +1,14 @@
+import 'package:design_project_homepage/reset_pass_screen.dart';
 import 'package:design_project_homepage/shopping_cart_page.dart';
 import 'package:design_project_homepage/sign_in_page.dart';
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'food_item.dart';
 import 'food_detail_page.dart'; // Import the FoodDetailPage
+import 'otp_screen.dart';
 import 'pages/onboarding_screen.dart';
 import 'pages/splash.dart';
 import 'sign_up_screen.dart';
-import 'profile_page.dart';
-
 
 void main() {
   runApp(MaterialApp(
@@ -15,9 +16,12 @@ void main() {
     routes: {
       '/': (context) => Splash(),
       '/obs': (context) => const OnboardingScreen(),
-      '/signup': (context) => const SignUpScreen(),
+      '/signup': (context) => const SignUpScreen(), 
       '/signin': (context) =>  SignInPage(),
-      '/foodHome': (context) => FoodHomePage(), //joujou check this law maktouba sah
+      '/foodHome': (context) => FoodHomePage(),
+        '/otp': (context) => const OTPVerificationScreen(),
+      '/reset-password': (context) => const ResetPasswordScreen(),
+
     },
   ));
 }
@@ -54,6 +58,7 @@ class _FoodHomePageState extends State<FoodHomePage> {
       currentPageIndex = index;
     });
 
+    // Check if the Cart tab (index 1) is selected
     if (index == 1) {
       Navigator.push(
         context,
@@ -63,18 +68,8 @@ class _FoodHomePageState extends State<FoodHomePage> {
           currentPageIndex = 0;
         });
       });
-    } else if (index == 2) { // For the Account tab
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => ProfilePage()),
-      ).then((_) {
-        setState(() {
-          currentPageIndex = 0;
-        });
-      });
     }
   }
-
 
   final List<FoodItem> mainCourseItems = [
     FoodItem(
@@ -307,26 +302,28 @@ class _FoodHomePageState extends State<FoodHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentPageIndex,
-        onTap: navigateToPage,
-        selectedItemColor: Colors.deepPurple,
-        unselectedItemColor: Colors.grey,
-        showSelectedLabels: true,
-        showUnselectedLabels: true,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+      bottomNavigationBar: GNav(
+        gap: 5,
+        iconSize: 26,
+        selectedIndex: currentPageIndex,
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        activeColor: Colors.deepPurple,
+        onTabChange: (index) {
+          navigateToPage(index);
+        },
+        tabs: const [
+          GButton(
+            icon: Icons.home,
+            text: 'Home',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_rounded),
-            label: 'Cart',
+          GButton(
+            icon: Icons.shopping_cart_rounded,
+            text: 'Cart',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Account',
-          ),
+          GButton(
+            icon: Icons.person,
+            text: 'Account',
+          )
         ],
       ),
       appBar: AppBar(
