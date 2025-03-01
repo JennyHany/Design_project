@@ -1,4 +1,6 @@
+import 'package:design_project_homepage/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -7,6 +9,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -29,11 +32,14 @@ class ProfilePage extends StatelessWidget {
                 children: [
                   Stack(
                     children: [
-                      const CircleAvatar(
-                        radius: 40,
-                        backgroundImage: AssetImage("assets/profile.jpg"),
-                      ),
-                      Positioned(
+                      userProvider.image != null
+                          ? CircleAvatar(
+                              radius: 60,
+                              backgroundImage: FileImage(userProvider.image!),
+                            )
+                          : const CircleAvatar(
+                              radius: 60, child: Icon(Icons.person)),
+                      /*Positioned(
                         bottom: 0,
                         right: 0,
                         child: Container(
@@ -42,35 +48,52 @@ class ProfilePage extends StatelessWidget {
                             shape: BoxShape.circle,
                             color: primaryColor,
                           ),
-                          child: const Icon(Icons.camera_alt, color: Colors.white, size: 16),
+                          child: const Icon(Icons.camera_alt,
+                              color: Colors.white, size: 16),
                         ),
-                      ),
+                      ),*/
                     ],
                   ),
                   const SizedBox(height: 10),
-                  const Text(
-                    "Albert Stevano Bajefski",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  Text(
+                    userProvider.username,
+                    style: const TextStyle(
+                        fontSize: 28, fontWeight: FontWeight.bold),
                   ),
-                  const Text(
-                    "Albertstevano@gmail.com",
-                    style: TextStyle(color: Colors.grey),
+                  Text(
+                    userProvider.email,
+                    style: const TextStyle(color: Colors.grey, fontSize: 18),
                   ),
                 ],
               ),
             ),
             const SizedBox(height: 30),
 
-
             // Profile Options
-            settingsOption(Icons.person, "Personal Data"),
-            settingsOption(Icons.settings, "Settings"),
-            settingsOption(Icons.credit_card, "Cards"),
+            settingsOption(
+              Icons.person,
+              "Personal Data",
+              () {Navigator.pushNamed(context, '/personaldata');},
+            ),
+            settingsOption(
+              Icons.settings,
+              "Settings",
+              () {},
+            ),
+            settingsOption(
+              Icons.credit_card,
+              "Cards",
+              () {},
+            ),
 
             const SizedBox(height: 10),
 
             // Support Options
-            settingsOption(Icons.help_outline, "Help Center"),
+            settingsOption(
+              Icons.help_outline,
+              "Help Center",
+              () {},
+            ),
             //settingsOption(Icons.delete_outline, "Request Account Deletion"),
             //settingsOption(Icons.person_add, "Add another account"),
 
@@ -85,8 +108,14 @@ class ProfilePage extends StatelessWidget {
                   backgroundColor: const Color(0xff8E22D2),
                   padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
-                label: const Text("Sign Out", style: TextStyle(fontSize: 18,color: Colors.white),),
-                icon: const Icon(Icons.exit_to_app,color: Colors.white,),
+                label: const Text(
+                  "Sign Out",
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
+                icon: const Icon(
+                  Icons.exit_to_app,
+                  color: Colors.white,
+                ),
               ),
             ),
 
@@ -102,7 +131,8 @@ class ProfilePage extends StatelessWidget {
         currentIndex: 3,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: "Cart"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart), label: "Cart"),
           BottomNavigationBarItem(icon: Icon(Icons.chat), label: "Chat"),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
         ],
@@ -111,12 +141,14 @@ class ProfilePage extends StatelessWidget {
   }
 
   // Settings Option Widget
-  Widget settingsOption(IconData icon, String title) {
+  Widget settingsOption(
+      IconData icon, String title, void Function() operation) {
     return ListTile(
       leading: Icon(icon, color: Colors.black),
       title: Text(title, style: const TextStyle(fontSize: 16)),
-      trailing: const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
-      onTap: () {},
+      trailing:
+          const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
+      onTap: operation,
     );
   }
 }

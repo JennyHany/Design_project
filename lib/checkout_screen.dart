@@ -5,7 +5,7 @@ class CheckoutScreen extends StatefulWidget {
   final double shippingCost;
   final double total;
 
-  CheckoutScreen({
+  const CheckoutScreen({
     required this.subtotal,
     required this.shippingCost,
     required this.total,
@@ -24,7 +24,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Checkout', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text('Checkout',
+            style: TextStyle(fontWeight: FontWeight.bold)),
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -44,7 +45,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   children: [
                     const Text(
                       'Payment Summary',
-                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 16),
                     Row(
@@ -65,14 +67,19 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Total', style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text('EGP ${widget.total}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                        const Text('Total',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        Text('EGP ${widget.total}',
+                            style:
+                                const TextStyle(fontWeight: FontWeight.bold)),
                       ],
                     ),
                     const SizedBox(height: 24),
 
                     // Address Input Field
-                    const Text('Shipping Address', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    const Text('Shipping Address',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 8),
                     TextFormField(
                       decoration: const InputDecoration(
@@ -94,15 +101,17 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     const SizedBox(height: 24),
 
                     // Payment Method Dropdown
-                    const Text('Payment Method', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    const Text('Payment Method',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 8),
                     DropdownButtonFormField<String>(
                       value: _selectedPaymentMethod,
                       items: ['Credit Card', 'Cash', 'InstaPay']
                           .map((method) => DropdownMenuItem(
-                        value: method,
-                        child: Text(method),
-                      ))
+                                value: method,
+                                child: Text(method),
+                              ))
                           .toList(),
                       onChanged: (value) {
                         setState(() {
@@ -124,7 +133,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                             context: context,
                             builder: (context) => AlertDialog(
                               title: const Text('Order Confirmed'),
-                              content: const Text('Your order has been placed successfully!'),
+                              content: const Text(
+                                  'Your order has been placed successfully!'),
                               actions: [
                                 TextButton(
                                   onPressed: () => Navigator.of(context).pop(),
@@ -143,7 +153,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       ),
                       child: const Padding(
                         padding: EdgeInsets.symmetric(vertical: 15),
-                        child: Text('Confirm Payment', style: TextStyle(fontSize: 18, color: Colors.white)),
+                        child: Text('Confirm Payment',
+                            style:
+                                TextStyle(fontSize: 18, color: Colors.white)),
                       ),
                     ),
                   ],
