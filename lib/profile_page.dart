@@ -1,4 +1,8 @@
+import 'dart:io'; // For File class
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart'; // For image picking
+import 'package:provider/provider.dart'; // For state management
+import 'package:design_project_homepage/user_provider.dart'; // Your UserProvider class
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -7,116 +11,177 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent, // Make scaffold background transparent
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent, // Transparent app bar
         elevation: 0,
         centerTitle: true,
         title: const Text(
           "Profile Settings",
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              // Save functionality
+            },
+            child: const Text(
+              "Save",
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+          ),
+        ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          children: [
-            const SizedBox(height: 20),
-            // Profile Image & Name
-            Center(
-              child: Column(
-                children: [
-                  Stack(
-                    children: [
-                      const CircleAvatar(
-                        radius: 40,
-                        backgroundImage: AssetImage("assets/profile.jpg"),
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0xFF100425), Color(0xFF1A053D)],
+          ),
+        ),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              const SizedBox(height: 20),
+              // Profile Image & Name
+              Center(
+                child: Stack(
+                  children: [
+                    userProvider.image != null
+                        ? CircleAvatar(
+                      radius: 60,
+                      backgroundImage: FileImage(userProvider.image!),
+                    )
+                        : const CircleAvatar(
+                      radius: 60,
+                      backgroundColor: Colors.white,
+                      child: Icon(Icons.person, size: 50, color: Colors.grey),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: GestureDetector(
+                        onTap: () => _pickImage(userProvider),
                         child: Container(
-                          padding: const EdgeInsets.all(4),
+                          padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            shape: BoxShape.circle,
                             color: primaryColor,
+                            shape: BoxShape.circle,
                           ),
-                          child: const Icon(Icons.camera_alt, color: Colors.white, size: 16),
+                          child: const Icon(
+                            Icons.add,
+                            color: Colors.white,
+                            size: 20,
+                          ),
                         ),
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  const Text(
-                    "Albert Stevano Bajefski",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  const Text(
-                    "Albertstevano@gmail.com",
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 30),
-
-
-            // Profile Options
-            settingsOption(Icons.person, "Personal Data"),
-            settingsOption(Icons.settings, "Settings"),
-            settingsOption(Icons.credit_card, "Cards"),
-
-            const SizedBox(height: 10),
-
-            // Support Options
-            settingsOption(Icons.help_outline, "Help Center"),
-            //settingsOption(Icons.delete_outline, "Request Account Deletion"),
-            //settingsOption(Icons.person_add, "Add another account"),
-
-            const SizedBox(height: 20),
-
-            // Sign Out Button
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                onPressed: () {},
-                style: OutlinedButton.styleFrom(
-                  backgroundColor: const Color(0xff8E22D2),
-                  padding: const EdgeInsets.symmetric(vertical: 16),
+                    ),
+                  ],
                 ),
-                label: const Text("Sign Out", style: TextStyle(fontSize: 18,color: Colors.white),),
-                icon: const Icon(Icons.exit_to_app,color: Colors.white,),
               ),
-            ),
+              const SizedBox(height: 10),
+              Text(
+                userProvider.username,
+                style: const TextStyle(
+                    fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),
+              ),
+              Text(
+                userProvider.email,
+                style: const TextStyle(color: Colors.grey, fontSize: 18),
+              ),
+              const SizedBox(height: 30),
 
-            const SizedBox(height: 20),
-          ],
+              // Profile Options
+              settingsOption(
+                Icons.person,
+                "Personal Data",
+                    () {
+                  Navigator.pushNamed(context, '/personaldata');
+                },
+              ),
+              settingsOption(
+                Icons.settings,
+                "Settings",
+                    () {
+                  // Navigate to settings page
+                },
+              ),
+              settingsOption(
+                Icons.credit_card,
+                "Cards",
+                    () {
+                  // Navigate to cards page
+                },
+              ),
+              settingsOption(
+                Icons.help_outline,
+                "Help Center",
+                    () {
+                  // Navigate to help center page
+                },
+              ),
+
+              const SizedBox(height: 20),
+
+              // Sign Out Button
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    // Sign out functionality
+                  },
+                  style: OutlinedButton.styleFrom(
+                    backgroundColor: primaryColor,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                  ),
+                  label: const Text(
+                    "Sign Out",
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                  icon: const Icon(
+                    Icons.exit_to_app,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 20),
+            ],
+          ),
         ),
-      ),
-
-      // Bottom Navigation Bar
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: primaryColor,
-        unselectedItemColor: Colors.grey,
-        currentIndex: 3,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: "Cart"),
-          BottomNavigationBarItem(icon: Icon(Icons.chat), label: "Chat"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-        ],
       ),
     );
   }
 
-  // Settings Option Widget
-  Widget settingsOption(IconData icon, String title) {
+  // Helper method to build profile options
+  Widget settingsOption(IconData icon, String title, void Function() onTap) {
     return ListTile(
-      leading: Icon(icon, color: Colors.black),
-      title: Text(title, style: const TextStyle(fontSize: 16)),
-      trailing: const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
-      onTap: () {},
+      leading: Icon(icon, color: Colors.white),
+      title: Text(title, style: const TextStyle(color: Colors.white, fontSize: 16)),
+      trailing: const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.white),
+      onTap: onTap,
     );
+  }
+
+  // Function to pick an image from the gallery or camera
+  Future<void> _pickImage(UserProvider userProvider) async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      userProvider.setImage(File(pickedFile.path));
+    }
   }
 }

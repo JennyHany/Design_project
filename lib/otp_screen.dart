@@ -9,7 +9,7 @@ class OTPVerificationScreen extends StatefulWidget {
 
 class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   List<TextEditingController> otpControllers =
-  List.generate(4, (index) => TextEditingController());
+      List.generate(4, (index) => TextEditingController());
   int _counter = 90; // 90 seconds countdown
   bool _isResendActive = false;
 
@@ -36,7 +36,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
 
   Widget _otpBox(TextEditingController controller) {
     return SizedBox(
-      width: 70,  //adjust border size
+      width: 70, //adjust border size
       height: 70,
       child: TextField(
         controller: controller,
@@ -70,7 +70,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-backgroundColor: Colors.white,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -100,7 +100,9 @@ backgroundColor: Colors.white,
               const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: otpControllers.map((controller) => _otpBox(controller)).toList(),
+                children: otpControllers
+                    .map((controller) => _otpBox(controller))
+                    .toList(),
               ),
               const SizedBox(height: 15),
               Center(
@@ -114,18 +116,20 @@ backgroundColor: Colors.white,
                     GestureDetector(
                       onTap: _isResendActive
                           ? () {
-                        setState(() {
-                          _counter = 90;
-                          _isResendActive = false;
-                          _startTimer();
-                        });
-                      }
+                              setState(() {
+                                _counter = 90;
+                                _isResendActive = false;
+                                _startTimer();
+                              });
+                            }
                           : null,
                       child: Text(
                         "Resend",
                         style: TextStyle(
                           fontSize: 17,
-                          color: _isResendActive ? Color(0xffB966EE) : Colors.grey,
+                          color: _isResendActive
+                              ? const Color(0xffB966EE)
+                              : Colors.grey,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -152,7 +156,7 @@ backgroundColor: Colors.white,
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xff8E22D2),
+                    backgroundColor: const Color(0xff8E22D2),
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25),
@@ -165,7 +169,6 @@ backgroundColor: Colors.white,
                         const SnackBar(content: Text("OTP Verified!")),
                       );
                       Navigator.pushNamed(context, '/reset-password');
-
                     }
                   },
                   child: const Text(

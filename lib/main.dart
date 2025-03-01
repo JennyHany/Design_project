@@ -1,9 +1,12 @@
+import 'package:design_project_homepage/personal_data_screen.dart';
 import 'package:design_project_homepage/profile_page.dart';
 import 'package:design_project_homepage/reset_pass_screen.dart';
 import 'package:design_project_homepage/shopping_cart_page.dart';
 import 'package:design_project_homepage/sign_in_page.dart';
+import 'package:design_project_homepage/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:provider/provider.dart';
 import 'food_item.dart';
 import 'food_detail_page.dart'; // Import the FoodDetailPage
 import 'otp_screen.dart';
@@ -12,20 +15,12 @@ import 'pages/splash.dart';
 import 'sign_up_screen.dart';
 
 void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    routes: {
-      '/': (context) => Splash(),
-      '/obs': (context) => const OnboardingScreen(),
-      '/signup': (context) => const SignUpScreen(), 
-      '/signin': (context) =>  SignInPage(),
-      '/foodHome': (context) => FoodHomePage(),
-        '/otp': (context) => const OTPVerificationScreen(),
-      '/reset-password': (context) => const ResetPasswordScreen(),
-      '/profilepage': (context) => ProfilePage(),
-
-    },
-  ));
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => UserProvider(),
+      child: FoodApp(),
+    ),
+  );
 }
 
 class FoodApp extends StatefulWidget {
@@ -38,9 +33,20 @@ class _FoodAppState extends State<FoodApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Food App',
+      routes: {
+        '/': (context) => Splash(),
+        '/obs': (context) => const OnboardingScreen(),
+        '/signup': (context) => const SignUpScreen(),
+        '/signin': (context) => SignInPage(),
+        '/foodHome': (context) => FoodHomePage(),
+        '/otp': (context) => const OTPVerificationScreen(),
+        '/reset-password': (context) => const ResetPasswordScreen(),
+        '/profilepage': (context) => ProfilePage(),
+        '/personaldata': (context) => PersonalDataScreen(),
+      },
       theme: ThemeData(primarySwatch: Colors.green),
       debugShowCheckedModeBanner: false,
-      home: FoodHomePage(),
+      //  home: FoodHomePage(),
     );
   }
 }
@@ -55,6 +61,7 @@ class _FoodHomePageState extends State<FoodHomePage> {
 
   NavigationDestinationLabelBehavior labelBehavior =
       NavigationDestinationLabelBehavior.onlyShowSelected;
+
   void navigateToPage(int index) {
     setState(() {
       currentPageIndex = index;
