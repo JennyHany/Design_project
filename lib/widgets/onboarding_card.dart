@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class OnboardingCard extends StatelessWidget {
   final String image, title, description, buttonText;
   final Function onPressed;
+  final bool textAbove; // New parameter to control text position
+
   const OnboardingCard({
   super.key,
   required this.image,
@@ -10,58 +12,35 @@ class OnboardingCard extends StatelessWidget {
   required this.description,
   required this.buttonText,
   required this.onPressed,
-  });
+  this.textAbove = false, // Default is false (text below image)
+ });
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: MediaQuery.sizeOf(context).height,
-        width: MediaQuery.sizeOf(context).width,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children:[
-            Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: Image.asset(
-                image,
-                fit: BoxFit.contain,
-              ),
+    return SizedBox(
+      height: MediaQuery.sizeOf(context).height,
+      width: MediaQuery.sizeOf(context).width,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween, // Keeps button at bottom
+        children: [
+          const SizedBox(height: 30), // Spacer at top
+          if (textAbove) _buildText(), // Text above image if true
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            child: Image.asset(
+              image,
+              fit: BoxFit.contain,
             ),
-            Column(children:[
-              Text(
-                title,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.red[400], // Fill color
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 15.0),
-                child: Text(
-                    description,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.grey[900],
-                      fontSize: 22,
-                      fontWeight: FontWeight.w300,
-                      fontFamily: 'Oswald',
-                    )
-                ),
-              )
-            ],
-            ),
-            MaterialButton(
+          ),
+          if (!textAbove) _buildText(), // Text below image if false
+          Padding(
+            padding: const EdgeInsets.only(bottom: 60),
+            child: MaterialButton(
               onPressed: () => onPressed(),
-              color: Colors.red[400],
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30), // Optional: rounded corners
-              ),
-              minWidth: 250,  // Set the minimum width to make it longer horizontally
-              height: 50,     // Set the height to adjust the vertical size
-              padding: const EdgeInsets.symmetric(horizontal: 0.0),  // Add horizontal padding for more width
+              color: Colors.purple[900],
+              shape: RoundedRectangleBorder(),
+              minWidth: 210,
+              height: 40,
               child: Text(
                 buttonText,
                 style: const TextStyle(
@@ -69,10 +48,40 @@ class OnboardingCard extends StatelessWidget {
                   fontSize: 20,
                 ),
               ),
-            )
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
-          ],
-        )
+  Widget _buildText() {
+    return Column(
+      children: [
+        Text(
+          title,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Trajan',
+            color: Colors.black,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 10.0),
+          child: Text(
+            description,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 25,
+              fontWeight: FontWeight.w700,
+              fontFamily: 'Trajan',
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
