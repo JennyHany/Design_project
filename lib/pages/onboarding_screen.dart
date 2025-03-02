@@ -19,8 +19,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       Stack(
         children: [
           OnboardingCard(
-            image: "assets/images/sc11.png",
-            title: "", // Remove title from here
+            image: "assets/sc11.png",
+            title: "", // 
             description: "",
             buttonText: "Next",
             textAbove: true,
@@ -29,7 +29,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             },
           ),
           Positioned(
-            top: 100, // Adjust as needed
+            top: 100, 
             left: 0,
             right: 0,
             child: Text(
@@ -41,7 +41,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         ],
       ),
       OnboardingCard(
-        image: "assets/images/sc22.png",
+        image: "assets/sc22.png",
         title: "All your favorites in one place!",
         description: "\n Discover a variety of delicious options just for you",
         buttonText: "Next",
@@ -50,7 +50,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         },
       ),
       OnboardingCard(
-        image: "assets/images/sc33.png",
+        image: "assets/sc33.png",
         title: "Good food within minutes!",
         description: "\n Delivered to your exact location",
         buttonText: "Sign up now",
