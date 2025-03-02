@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
+import '../sign_up_screen.dart';
 import '../widgets/onboarding_card.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -10,79 +10,99 @@ class OnboardingScreen extends StatefulWidget {
   State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
-class _OnboardingScreenState extends State<OnboardingScreen>{
-  static final PageController _pageController = PageController(initialPage:0);
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  static final PageController _pageController = PageController(initialPage: 0);
 
   @override
   Widget build(BuildContext context) {
     List<Widget> _onBoardingScreens = [
+      Stack(
+        children: [
+          OnboardingCard(
+            image: "assets/images/sc11.png",
+            title: "", // Remove title from here
+            description: "",
+            buttonText: "Next",
+            textAbove: true,
+            onPressed: () {
+              _pageController.animateToPage(1, duration: Durations.long1, curve: Curves.linear);
+            },
+          ),
+          Positioned(
+            top: 100, // Adjust as needed
+            left: 0,
+            right: 0,
+            child: Text(
+              "Don't know what to eat?",
+              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, fontFamily: 'Trajan',),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ],
+      ),
       OnboardingCard(
-        image: "assets/screen3.2.png",
-        title: "Don't know what to eat?",
-        description: "",
+        image: "assets/images/sc22.png",
+        title: "All your favorites in one place!",
+        description: "\n Discover a variety of delicious options just for you",
         buttonText: "Next",
         onPressed: () {
-          _pageController.animateToPage(
-              1, duration: Durations.long1, curve: Curves.linear);
+          _pageController.animateToPage(2, duration: Durations.long1, curve: Curves.linear);
         },
       ),
       OnboardingCard(
-        image: "assets/screen2.1.png",
-        title: "Diverse and fresh food",
-        description: "Take a look at all the options we have for you!",
-        buttonText: "Next",
-        onPressed: () {
-          _pageController.animateToPage(
-              2, duration: Durations.long1, curve: Curves.linear);
-        },
-      ),
-      OnboardingCard(
-        image: "assets/loc.png",
-        title: "Delivered to your exact location",
-        description: "Everything you need in one application!",
+        image: "assets/images/sc33.png",
+        title: "Good food within minutes!",
+        description: "\n Delivered to your exact location",
         buttonText: "Sign up now",
         onPressed: () {
-          Navigator.pushNamed(context, '/signup'); // Navigate to sign-up page
+          Navigator.pushNamed(context, '/signup');
         },
       ),
-
     ];
 
-      return Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 50.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // SmoothPageIndicator at the top of the page
-              SmoothPageIndicator(
-                controller: _pageController,
-                count: _onBoardingScreens.length,
-                effect: ExpandingDotsEffect(
-                  activeDotColor: Colors.red[400]!,
-                  dotColor: Colors.red[200]!,
-                  dotWidth: 50.0,
-                  // Increases dot width for a longer appearance
-                  dotHeight: 6.0,
-                  // Sets dot height for a thinner appearance
-                  expansionFactor: 2.5,
-                ),
-                onDotClicked: (index) {
-                  _pageController.animateToPage(
-                      index, duration: Durations.long1, curve: Curves.linear);
-                },
-              ),
-              Expanded(
-                child: PageView(
-                  controller: _pageController,
-                  children: _onBoardingScreens,
-                ),
-              ),
-            ],
+    return Scaffold(
+      body: Stack(
+        alignment: Alignment.center,
+        children: [
+          PageView(
+            controller: _pageController,
+            children: _onBoardingScreens,
           ),
-        ),
-      );
-    }
+          Positioned(
+            bottom: 30,
+            child: SmoothPageIndicator(
+              controller: _pageController,
+              count: _onBoardingScreens.length,
+              effect: ExpandingDotsEffect(
+                activeDotColor: Colors.purple[900]!,
+                dotColor: Colors.grey,
+                dotWidth: 40.0,
+                dotHeight: 10.0,
+              ),
+            ),
+          ),
+          Positioned(
+            top: 30,
+            right: 20,
+            child: TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SignUpScreen()),
+                );
+              },
+              child: const Text(
+                "Skip",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
+}
+
