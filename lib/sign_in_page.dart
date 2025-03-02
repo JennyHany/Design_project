@@ -5,13 +5,15 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/soret l tagroba.jpg"),
-            fit: BoxFit.cover, // Full background image
+            fit: BoxFit.cover,
+            // Full background image
           ),
         ),
         child: Padding(
@@ -59,7 +61,8 @@ class SignInPage extends StatelessWidget {
                   hintText: "Password",
                   filled: true,
                   fillColor: Colors.white,
-                  suffixIcon: const Icon(Icons.visibility_off, color: Colors.black54),
+                  suffixIcon:
+                      const Icon(Icons.visibility_off, color: Colors.black54),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
@@ -72,12 +75,14 @@ class SignInPage extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const ForgotPasswordPage()),
+                      MaterialPageRoute(
+                          builder: (context) => const ForgotPasswordPage()),
                     );
                   },
                   child: const Text(
                     "Forgot password?",
-                    style: TextStyle(color: Colors.white,fontSize: 16), // Changed to white
+                    style: TextStyle(
+                        color: Colors.white, fontSize: 16), // Changed to white
                   ),
                 ),
               ),
@@ -97,7 +102,10 @@ class SignInPage extends StatelessWidget {
                   ),
                   child: const Text(
                     "Sign In",
-                    style: TextStyle(color: Color(0xff8E22D2), fontSize: 21,fontWeight: FontWeight.bold), // Purple text
+                    style: TextStyle(
+                        color: Color(0xff8E22D2),
+                        fontSize: 21,
+                        fontWeight: FontWeight.bold), // Purple text
                   ),
                 ),
               ),
@@ -105,7 +113,7 @@ class SignInPage extends StatelessWidget {
               const Center(
                 child: Text(
                   'Or sign in with',
-                  style: TextStyle(color: Colors.white,fontSize: 15),
+                  style: TextStyle(color: Colors.white, fontSize: 15),
                 ),
               ),
               const SizedBox(height: 10),
@@ -123,10 +131,15 @@ class SignInPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Don't have an account?", style: TextStyle(color: Colors.white,fontSize: 18)),
+                  const Text("Don't have an account?",
+                      style: TextStyle(color: Colors.white, fontSize: 18)),
                   TextButton(
-                    onPressed: () {Navigator.pushNamed(context, '/signup');},
-                    child: const Text("Register", style: TextStyle(color: Color(0xffB966EE),fontSize: 18)),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/signup');
+                    },
+                    child: const Text("Register",
+                        style:
+                            TextStyle(color: Color(0xffB966EE), fontSize: 18)),
                   ),
                 ],
               ),
