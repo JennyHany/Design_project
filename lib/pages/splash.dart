@@ -14,7 +14,7 @@ class _SplashState extends State<Splash> {
   }
 
   startTimer() {
-    var duration = const Duration(seconds: 10);
+    var duration = Duration(seconds: 10);
     return Timer(duration, route);
   }
 
@@ -30,8 +30,8 @@ class _SplashState extends State<Splash> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Colors.orange[50]!, // Start color
-              Colors.orange[300]!, // End color
+              Colors.purple[50]!, // Start color
+              Colors.purple[900]!, // End color
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -46,7 +46,7 @@ class _SplashState extends State<Splash> {
   Widget content() {
     return Center(
       child: Transform.scale(
-        scale: 1.5, // Adjust the scale factor
+        scale: 1, // Adjust the scale factor
         child: Lottie.asset('assets/splash_animation.json'),
       ),
     );
