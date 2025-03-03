@@ -31,7 +31,7 @@ class _SplashState extends State<Splash> {
           gradient: LinearGradient(
             colors: [
               Colors.purple[50]!, // Start color
-              Colors.purple[900]!, // End color
+              Colors.purple[900]! // End color
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -45,11 +45,26 @@ class _SplashState extends State<Splash> {
 
   Widget content() {
     return Center(
-      child: Transform.scale(
-        scale: 1, // Adjust the scale factor
-        child: Lottie.asset('assets/splash_animation.json'),
+      child: Column(
+        mainAxisSize: MainAxisSize.min, // Keeps the content centered
+        children: [
+          Transform.scale(
+            scale: 1, // Adjust the scale factor
+            child: Lottie.asset('assets/splash_animation.json'),
+          ),
+          SizedBox(height: 20), // Adds spacing between animation and text
+          Text(
+            "HurryBite", // Your title
+            style: TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Oswald',
+              color: Colors.white, // Adjust color if needed
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
     );
   }
-  }
-
+}
