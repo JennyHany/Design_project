@@ -48,7 +48,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         email: email,
         username: username,
         password: password,
-        image: _image!,
+        image: _image!, phone: '',
       );
 
       // Navigate to Main Page

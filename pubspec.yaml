@@ -63,9 +63,9 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/sc11.png
-    - assets/sc22.png
-    - assets/sc33.png
+    - assets/screen2.1.png
+    - assets/screen3.2.png
+    - assets/loc.png
     - assets/steak.png
     - assets/shrimp.png
     - assets/ham.png
@@ -208,6 +208,7 @@ flutter:
     - assets/soret l tagroba.jpg
     - assets/search bar.jpg
     - assets/success image.jpg
+    - assets/card.PNG
 
 
 
@@ -227,7 +228,7 @@ flutter:
   fonts:
    - family: Oswald
      fonts:
-       - asset: fonts/Sigmar-Regular.ttf
+       - asset: fonts/RobotoMono-VariableFont_wght.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
    - family: Trajan

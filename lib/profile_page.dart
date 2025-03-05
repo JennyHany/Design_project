@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart'; // For image picking
 import 'package:provider/provider.dart'; // For state management
 import 'package:design_project_homepage/user_provider.dart'; // Your UserProvider class
+import 'cards_page.dart';
+
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -122,7 +124,10 @@ class ProfilePage extends StatelessWidget {
                 Icons.credit_card,
                 "Cards",
                     () {
-                  // Navigate to cards page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) =>  CardsPage()),
+                  );
                 },
               ),
               settingsOption(
