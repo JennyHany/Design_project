@@ -20,7 +20,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         children: [
           OnboardingCard(
             image: "assets/sc11.png",
-            title: "", // 
+            title: "", // Remove title from here
             description: "",
             buttonText: "Next",
             textAbove: true,
@@ -29,12 +29,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             },
           ),
           Positioned(
-            top: 100, 
+            top: 100, // Adjust as needed
             left: 0,
             right: 0,
             child: Text(
               "Don't know what to eat?",
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, fontFamily: 'Trajan',),
+              style: TextStyle(color: Colors.white,fontSize: 28, fontWeight: FontWeight.bold, fontFamily: 'Trajan',),
               textAlign: TextAlign.center,
             ),
           ),
@@ -74,9 +74,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               controller: _pageController,
               count: _onBoardingScreens.length,
               effect: ExpandingDotsEffect(
-                activeDotColor: Colors.purple[900]!,
+                activeDotColor: Colors.deepPurple[300]!,
                 dotColor: Colors.grey,
-                dotWidth: 40.0,
+                dotWidth: 10.0,
                 dotHeight: 10.0,
               ),
             ),

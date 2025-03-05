@@ -17,40 +17,43 @@ class OnboardingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.sizeOf(context).height,
-      width: MediaQuery.sizeOf(context).width,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween, // Keeps button at bottom
-        children: [
-          const SizedBox(height: 30), // Spacer at top
-          if (textAbove) _buildText(), // Text above image if true
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30.0),
-            child: Image.asset(
-              image,
-              fit: BoxFit.contain,
+    return Container(
+      color: Color(0xFF100425), // Background color
+      child: SizedBox(
+        height: MediaQuery.sizeOf(context).height,
+        width: MediaQuery.sizeOf(context).width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween, // Keeps button at bottom
+          children: [
+            const SizedBox(height: 30), // Spacer at top
+            if (textAbove) _buildText(), // Text above image if true
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30.0),
+              child: Image.asset(
+                image,
+                fit: BoxFit.contain,
+              ),
             ),
-          ),
-          if (!textAbove) _buildText(), // Text below image if false
-          Padding(
-            padding: const EdgeInsets.only(bottom: 60),
-            child: MaterialButton(
-              onPressed: () => onPressed(),
-              color: Colors.purple[900],
-              shape: RoundedRectangleBorder(),
-              minWidth: 210,
-              height: 40,
-              child: Text(
-                buttonText,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
+            if (!textAbove) _buildText(), // Text below image if false
+            Padding(
+              padding: const EdgeInsets.only(bottom: 60),
+              child: MaterialButton(
+                onPressed: () => onPressed(),
+                color: Colors.deepPurple[400]!,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+                minWidth: 100,
+                height: 40,
+                child: Text(
+                  buttonText,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -65,7 +68,7 @@ class OnboardingCard extends StatelessWidget {
             fontSize: 28,
             fontWeight: FontWeight.bold,
             fontFamily: 'Trajan',
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
         Padding(
@@ -74,7 +77,7 @@ class OnboardingCard extends StatelessWidget {
             description,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.black,
+              color: Colors.white,
               fontSize: 25,
               fontWeight: FontWeight.w700,
               fontFamily: 'Trajan',
