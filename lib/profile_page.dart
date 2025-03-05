@@ -4,7 +4,7 @@ import 'package:image_picker/image_picker.dart'; // For image picking
 import 'package:provider/provider.dart'; // For state management
 import 'package:design_project_homepage/user_provider.dart'; // Your UserProvider class
 import 'cards_page.dart';
-
+import 'settings_page.dart'; // Import the SettingsPage
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -117,7 +117,10 @@ class ProfilePage extends StatelessWidget {
                 Icons.settings,
                 "Settings",
                     () {
-                  // Navigate to settings page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SettingsPage()),
+                  );
                 },
               ),
               settingsOption(
