@@ -35,4 +35,14 @@ class UserProvider with ChangeNotifier {
     _image = image;
     notifyListeners();
   }
+
+  // Sign out method
+  void signOut() {
+    _email = ""; // Clear email
+    _username = ""; // Clear username
+    _password = ""; // Clear password
+    _phone = ""; // Clear phone
+    _image = null; // Clear profile image
+    notifyListeners(); // Notify listeners to update the UI
+  }
 }

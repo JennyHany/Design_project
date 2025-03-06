@@ -5,6 +5,8 @@ import 'package:provider/provider.dart'; // For state management
 import 'package:design_project_homepage/user_provider.dart'; // Your UserProvider class
 import 'cards_page.dart';
 import 'settings_page.dart'; // Import the SettingsPage
+import 'help_center_page.dart'; // Import the HelpCenterPage
+import 'sign_in_page.dart'; // Import your LoginScreen
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -138,6 +140,10 @@ class ProfilePage extends StatelessWidget {
                 "Help Center",
                     () {
                   // Navigate to help center page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HelpCenterPage()),
+                  );
                 },
               ),
 
@@ -149,6 +155,7 @@ class ProfilePage extends StatelessWidget {
                 child: ElevatedButton.icon(
                   onPressed: () {
                     // Sign out functionality
+                    _signOut(context);
                   },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: primaryColor,
@@ -191,5 +198,18 @@ class ProfilePage extends StatelessWidget {
     if (pickedFile != null) {
       userProvider.setImage(File(pickedFile.path));
     }
+  }
+
+  // Function to sign out the user
+  void _signOut(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    userProvider.signOut(); // Call the sign-out method in UserProvider
+
+    // Navigate to the LoginScreen and remove all previous routes
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) =>  SignInPage()),
+          (Route<dynamic> route) => false, // Remove all routes
+    );
   }
 }
