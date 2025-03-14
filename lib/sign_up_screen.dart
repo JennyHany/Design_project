@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -33,9 +34,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
   }
 
-  void _validateAndSubmit() {
+  void _validateAndSubmit() async {
     setState(() {
-      _isImageValid = _image != null; // Validate image
+      _isImageValid = _image != null;
     });
 
     if (_formKey.currentState!.validate() && isPassCorrect && _image != null) {
@@ -43,16 +44,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
       String username = uname.text;
       String password = passCreate.text;
 
-      // Save user data in provider
-      Provider.of<UserProvider>(context, listen: false).setUserData(
-        email: email,
-        username: username,
-        password: password,
-        image: _image!, phone: '',
-      );
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email, password: password);
 
-      // Navigate to Main Page
-      Navigator.pushNamed(context, '/foodHome');
+        // Save user data in provider
+        Provider.of<UserProvider>(context, listen: false).setUserData(
+          email: email,
+          username: username,
+          password: password,
+          image: _image!,
+          phone: '',
+        );
+
+        // Navigate to Main Page
+        Navigator.pushNamed(context, '/foodHome');
+      } on FirebaseAuthException catch (e) {
+        String errorMessage = 'Registration failed';
+        if (e.code == 'email-already-in-use') {
+          errorMessage = 'This email is already in use.';
+        } else if (e.code == 'weak-password') {
+          errorMessage = 'Your password is too weak.';
+        }
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(errorMessage)),
+        );
+      }
     }
   }
 

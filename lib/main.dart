@@ -13,13 +13,17 @@ import 'otp_screen.dart';
 import 'pages/onboarding_screen.dart';
 import 'pages/splash.dart';
 import 'sign_up_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(
     ChangeNotifierProvider(
       create: (context) => UserProvider(),
       child: FoodApp(),
     ),
+
   );
 }
 
