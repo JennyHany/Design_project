@@ -68,12 +68,9 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/screen2.1.png
-    - assets/screen3.2.png
     - assets/sc11.png
     - assets/sc22.png
     - assets/sc33.png
-    - assets/loc.png
     - assets/steak.png
     - assets/shrimp.png
     - assets/ham.png
