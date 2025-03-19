@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'main.dart';
+import 'profile_page.dart';
 
 class CartScreen extends StatelessWidget {
   @override
@@ -25,7 +27,7 @@ class CartScreen extends StatelessWidget {
         foregroundColor: Colors.black,
       ),
       body: _buildEmptyCart(context),
-      bottomNavigationBar: _buildBottomNavigationBar(),
+      bottomNavigationBar: _buildBottomNavigationBar(context),
     );
   }
 
@@ -57,7 +59,10 @@ class CartScreen extends StatelessWidget {
         const SizedBox(height: 40),
         ElevatedButton(
           onPressed: () {
-            // Navigate to food menu or home
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => FoodHomePage()),
+            );
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xff8E22D2),
@@ -75,7 +80,7 @@ class CartScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBottomNavigationBar() {
+  Widget _buildBottomNavigationBar(BuildContext context) {
     return BottomNavigationBar(
       currentIndex: 1,
       // Set the active tab to Cart
@@ -83,6 +88,19 @@ class CartScreen extends StatelessWidget {
       unselectedItemColor: Colors.grey,
       showSelectedLabels: false,
       showUnselectedLabels: false,
+      onTap: (index) {
+        if (index == 0) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => FoodHomePage()),
+          );
+        }  else if (index == 2) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => ProfilePage()),
+          );
+        }
+      },
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home_outlined),
