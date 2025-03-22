@@ -151,12 +151,6 @@ class FoodDetailPage extends StatelessWidget {
           _foodVariantCard('Vanilla Pudding', 'Creamy vanilla pudding', 3.50, 'assets/vanilla pudding.png'),
           _foodVariantCard('Rice Pudding', 'Traditional rice pudding with cinnamon', 3.50, 'assets/rice pudding.png'),
         ];
-      case 'Gateau':
-        return [
-          _foodVariantCard('Chocolate Gateau', 'Decadent chocolate gateau', 6.50, 'assets/chocolate gateau.png'),
-          _foodVariantCard('Fruit Gateau', 'Fresh fruit-topped gateau', 6.50, 'assets/fruit gateau.png'),
-          _foodVariantCard('Vanilla Gateau', 'Light vanilla gateau', 6.50, 'assets/vanilla gateau.png'),
-        ];
       case 'Cupcake':
         return [
           _foodVariantCard('Chocolate Cupcake', 'Rich chocolate cupcake', 2.50, 'assets/chocolate cupcake.png'),
