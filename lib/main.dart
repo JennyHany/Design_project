@@ -7,23 +7,20 @@ import 'package:design_project_homepage/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'food_item.dart';
 import 'food_detail_page.dart'; // Import the FoodDetailPage
 import 'otp_screen.dart';
 import 'pages/onboarding_screen.dart';
 import 'pages/splash.dart';
 import 'sign_up_screen.dart';
-import 'package:firebase_core/firebase_core.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+void main() {
   runApp(
     ChangeNotifierProvider(
       create: (context) => UserProvider(),
       child: FoodApp(),
     ),
-
   );
 }
 
@@ -48,7 +45,7 @@ class _FoodAppState extends State<FoodApp> {
         '/profilepage': (context) => ProfilePage(),
         '/personaldata': (context) => PersonalDataScreen(),
       },
-      theme: ThemeData(primarySwatch: Colors.green),
+      theme: ThemeData(primarySwatch: Colors.purple),
       debugShowCheckedModeBanner: false,
       //  home: FoodHomePage(),
     );
@@ -93,38 +90,44 @@ class _FoodHomePageState extends State<FoodHomePage> {
 
   final List<FoodItem> mainCourseItems = [
     FoodItem(
+      name: 'Appetizers',
+      imageUrl: 'assets/app1.png',
+      description: 'Start Your Meal with a Flavorful Kick!',
+      price: 9,
+    ),
+    FoodItem(
       name: 'Pizza',
-      imageUrl: 'assets/pizza.png',
+      imageUrl: 'assets/pizza2.png',
       description: 'Delicious cheesy pizza with toppings',
       price: 9.99,
     ),
     FoodItem(
       name: 'Burger',
-      imageUrl: 'assets/burger.png',
+      imageUrl: 'assets/burger1.png',
       description: 'Juicy beef burger with fresh lettuce',
       price: 8.99,
     ),
     FoodItem(
       name: 'Chicken',
-      imageUrl: 'assets/chicken.png',
+      imageUrl: 'assets/chicken1.png',
       description: 'Grilled chicken served with spices',
       price: 10.99,
     ),
     FoodItem(
       name: 'Steak',
-      imageUrl: 'assets/steak.png',
+      imageUrl: 'assets/meat1.png',
       description: 'Tender steak cooked to perfection',
       price: 15.99,
     ),
     FoodItem(
       name: 'Ham',
-      imageUrl: 'assets/ham.png',
+      imageUrl: 'assets/ham1.png',
       description: 'Smoked ham with a savory flavor',
       price: 12.99,
     ),
     FoodItem(
       name: 'Sushi',
-      imageUrl: 'assets/sushi.png',
+      imageUrl: 'assets/sushi1.png',
       description: 'Fresh sushi rolls with fish and vegetables',
       price: 14.99,
     ),
@@ -190,55 +193,49 @@ class _FoodHomePageState extends State<FoodHomePage> {
   final List<FoodItem> dessertsItems = [
     FoodItem(
       name: 'Ice Cream',
-      imageUrl: 'assets/ice cream.png',
+      imageUrl: 'assets/icecream1.png',
       description: 'Creamy ice cream in various flavors',
       price: 4.50,
     ),
     FoodItem(
       name: 'Cake',
-      imageUrl: 'assets/cake.png',
+      imageUrl: 'assets/cake1.png',
       description: 'Rich and delicious cake',
       price: 5.50,
     ),
     FoodItem(
       name: 'Pudding',
-      imageUrl: 'assets/pudding.png',
+      imageUrl: 'assets/pudding1.png',
       description: 'Smooth and creamy pudding',
       price: 3.50,
     ),
     FoodItem(
-      name: 'Gateau',
-      imageUrl: 'assets/gateau.png',
-      description: 'Decadent chocolate gateau',
-      price: 6.50,
-    ),
-    FoodItem(
       name: 'Cupcake',
-      imageUrl: 'assets/cupcake.png',
+      imageUrl: 'assets/cupcake1.png',
       description: 'Delightful mini cakes',
       price: 2.50,
     ),
     FoodItem(
       name: 'Cheesecake',
-      imageUrl: 'assets/cheesecake.png',
+      imageUrl: 'assets/cheesecake1.png',
       description: 'Creamy cheesecake with a graham cracker crust',
       price: 5.99,
     ),
     FoodItem(
       name: 'Brownie',
-      imageUrl: 'assets/brownie.png',
+      imageUrl: 'assets/brownies.png',
       description: 'Fudgy brownie topped with chocolate',
       price: 3.99,
     ),
     FoodItem(
       name: 'Cookies',
-      imageUrl: 'assets/cookies.png',
+      imageUrl: 'assets/cookies1.png',
       description: 'Freshly baked cookies',
       price: 1.99,
     ),
     FoodItem(
       name: 'Doughnut',
-      imageUrl: 'assets/doughnut.png',
+      imageUrl: 'assets/donuts1.png',
       description: 'Soft and fluffy doughnuts',
       price: 2.50,
     ),
@@ -347,7 +344,7 @@ class _FoodHomePageState extends State<FoodHomePage> {
         ],
       ),
       appBar: AppBar(
-        title: const Text('Welcome to FoodApp'),
+        title: const Text('Welcome to HurryBite'),
         automaticallyImplyLeading: false,
         actions: [
           Padding(
@@ -356,9 +353,9 @@ class _FoodHomePageState extends State<FoodHomePage> {
               children: [
                 Container(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: Colors.red,
+                    color: Colors.purple[900]!,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: const Row(
@@ -384,9 +381,9 @@ class _FoodHomePageState extends State<FoodHomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               searchBar(),
-              const SizedBox(height: 16),
+              const SizedBox(height: 18),
               promotionalBanner(),
-              sectionTitle("Main Course"),
+              sectionTitle("Select by category"),
               foodList(mainCourseItems),
               sectionTitle("Appetizers"),
               foodList(appetizersItems),
@@ -423,46 +420,73 @@ class _FoodHomePageState extends State<FoodHomePage> {
     );
   }
 
+  final PageController _pageController = PageController();
+
   Widget promotionalBanner() {
+    return Column(
+      children: [
+        SizedBox(
+          height: 150, // Adjust based on your banner size
+          child: PageView(
+            controller: _pageController,
+            children: [
+              singleBanner(
+                  "Check Out Our Chicken Dishes", "assets/comfortfood.png"),
+              singleBanner(
+                  "We’ve got your dessert cravings covered!", "assets/p2.png"),
+              singleBanner(
+                  "Don't miss our must-try cocktails!", "assets/p3.png"),
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
+        SmoothPageIndicator(
+          controller: _pageController,
+          count: 3, // Number of banners
+          effect: ExpandingDotsEffect(
+            dotHeight: 8,
+            dotWidth: 8,
+            activeDotColor: Colors.purple,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget singleBanner(String title, String imagePath) {
     return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.red[200],
-        borderRadius: BorderRadius.circular(8),
+        color: Colors.purple[900]!,
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Expanded(
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Fresh Meat",
-                  style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
+                  title,
+                  style: const TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
-                SizedBox(height: 4),
-                Text(
-                  "20% Off",
-                  style: TextStyle(
-                      fontSize: 34,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
+                const SizedBox(height: 2),
               ],
             ),
           ),
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Image.asset(
-              'assets/fresh_meat_banner.png',
-              width: 130,
+              imagePath,
+              width: 150,
               height: 130,
+              fit: BoxFit.cover,
             ),
           ),
         ],
@@ -470,23 +494,25 @@ class _FoodHomePageState extends State<FoodHomePage> {
     );
   }
 
+
   Widget sectionTitle(String title) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Text(
         title,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 22,
           fontWeight: FontWeight.bold,
-          color: Colors.green,
+          fontFamily: 'Oswald',
+          color: Colors.purple[900],
         ),
       ),
     );
   }
 
   Widget foodList(List<FoodItem> items) {
-    return Container(
-      height: 170,
+    return SizedBox(
+      height: 140,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: items.length,
@@ -502,28 +528,40 @@ class _FoodHomePageState extends State<FoodHomePage> {
               );
             },
             child: Card(
-              margin: const EdgeInsets.only(right: 10),
-              child: Column(
-                children: [
-                  Image.asset(
-                    item.imageUrl,
-                    height: 130,
-                    width: 120,
-                    fit: BoxFit.cover,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      item.name,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16), // Smooth, rounded corners
+              ),
+              margin: const EdgeInsets.only(right: 10), // Adjust side margins
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0), // Reduce default extra spacing
+                child: Column(
+                  mainAxisSize: MainAxisSize.min, // Prevents unwanted space
+                  crossAxisAlignment: CrossAxisAlignment.center, // Centers everything
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(16), // Rounded corners for image
+                      child: Image.asset(
+                        item.imageUrl,
+                        height: 100, // Adjusted to fit better
+                        width: 120,
+                        fit: BoxFit.cover,
                       ),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 3), // Small spacing between image & text
+                    Text(
+                      item.name,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Oswald',
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
               ),
             ),
+
+
           );
         },
       ),
