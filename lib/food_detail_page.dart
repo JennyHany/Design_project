@@ -40,6 +40,15 @@ class FoodDetailPage extends StatelessWidget {
 
   List<Widget> _getVariants(FoodItem foodItem) {
     switch (foodItem.name) {
+      case 'Appetizers':
+        return [
+          _foodVariantCard('Chicken Wings', 'Crispy chicken wings tossed in sauce', 9.99, 'assets/chicken wings.png'),
+          _foodVariantCard('Onion Rings', 'Golden-fried onion rings', 10.99, 'assets/onion rings.png'),
+          _foodVariantCard('Tacos', 'Soft shell tacos filled with meat and toppings', 6.99, 'assets/tacos.png'),
+          _foodVariantCard('Spring Rolls', 'Crispy spring rolls with dipping sauce', 5.49, 'assets/spring rolls.png'),
+          _foodVariantCard('Salad', 'Fresh garden salad with dressing', 4.99, 'assets/salad.png'),
+          _foodVariantCard('Fries', 'Crispy french fries', 3.99, 'assets/fries.png'),
+        ];
       case 'Pizza':
         return [
           _foodVariantCard('Margherita Pizza', 'Classic Margherita with fresh mozzarella and basil', 9.99, 'assets/margherita pizza.png'),
@@ -85,53 +94,11 @@ class FoodDetailPage extends StatelessWidget {
           _foodVariantCard('Shrimp Cocktail', 'Succulent shrimp served with cocktail sauce', 16.99, 'assets/Shrimp Cocktail.png'),
           _foodVariantCard('Mixed Seafood Platter', 'A variety of fresh seafood', 20.99, 'assets/Mixed Seafood Platter.png'),
         ];
-      case 'Shrimp':
-        return [
-          _foodVariantCard('Garlic Shrimp', 'Shrimp sautéed in garlic butter', 13.99, 'assets/garlic shrimp.png'),
-          _foodVariantCard('Spicy Shrimp', 'Shrimp in a spicy sauce', 14.49, 'assets/spicy shrimp.png'),
-          _foodVariantCard('Shrimp Fried Rice', 'Fried rice with succulent shrimp', 12.99, 'assets/shrimp fried rice.png'),
-        ];
       case 'Pasta':
         return [
           _foodVariantCard('Alfredo Pasta', 'Creamy fettuccine alfredo', 11.99, 'assets/alfredo pasta.png'),
           _foodVariantCard('Pesto Pasta', 'Pasta with fresh basil pesto', 12.49, 'assets/pesto pasta.png'),
           _foodVariantCard('Spaghetti Bolognese', 'Spaghetti with hearty meat sauce', 12.99, 'assets/spaghetti bolognese.png'),
-        ];
-      case 'Chicken Wings':
-        return [
-          _foodVariantCard('Buffalo Wings', 'Spicy buffalo chicken wings', 7.99, 'assets/buffalo wings.png'),
-          _foodVariantCard('BBQ Wings', 'Sweet BBQ chicken wings', 8.49, 'assets/bbq wings.png'),
-          _foodVariantCard('Garlic Parmesan Wings', 'Wings tossed in garlic parmesan sauce', 8.99, 'assets/garlic parmesan wings.png'),
-        ];
-      case 'Onion Rings':
-        return [
-          _foodVariantCard('Classic Onion Rings', 'Crispy onion rings', 5.99, 'assets/classic onion rings.png'),
-          _foodVariantCard('Beer-Battered Onion Rings', 'Beer-battered and crispy', 6.49, 'assets/beer battered onion rings.png'),
-          _foodVariantCard('Mozzarella Onion Rings', 'Onion rings filled with mozzarella', 6.99, 'assets/mozzarella onion rings.png'),
-        ];
-      case 'Tacos':
-        return [
-          _foodVariantCard('Beef Tacos', 'Soft shell tacos with beef', 6.99, 'assets/beef tacos.png'),
-          _foodVariantCard('Chicken Tacos', 'Soft shell tacos with chicken', 7.49, 'assets/chicken tacos.png'),
-          _foodVariantCard('Veggie Tacos', 'Soft shell tacos with vegetables', 6.49, 'assets/veggie tacos.png'),
-        ];
-      case 'Spring Rolls':
-        return [
-          _foodVariantCard('Vegetable Spring Rolls', 'Crispy vegetable spring rolls', 5.49, 'assets/vegetable spring rolls.png'),
-          _foodVariantCard('Shrimp Spring Rolls', 'Shrimp-filled spring rolls', 6.49, 'assets/shrimp spring rolls.png'),
-          _foodVariantCard('Pork Spring Rolls', 'Pork-filled spring rolls', 6.99, 'assets/pork spring rolls.png'),
-        ];
-      case 'Salad':
-        return [
-          _foodVariantCard('Caesar Salad', 'Fresh romaine with Caesar dressing', 4.99, 'assets/caesar salad.png'),
-          _foodVariantCard('Greek Salad', 'Mediterranean salad with feta', 5.49, 'assets/greek salad.png'),
-          _foodVariantCard('Garden Salad', 'Fresh garden salad', 4.49, 'assets/garden salad.png'),
-        ];
-      case 'Fries':
-        return [
-          _foodVariantCard('Regular Fries', 'Classic crispy fries', 3.99, 'assets/regular fries.png'),
-          _foodVariantCard('Sweet Potato Fries', 'Crispy sweet potato fries', 4.49, 'assets/sweet potato fries.png'),
-          _foodVariantCard('Loaded Fries', 'Fries topped with cheese and bacon', 5.49, 'assets/loaded fries.png'),
         ];
       case 'Ice Cream':
         return [
@@ -181,7 +148,19 @@ class FoodDetailPage extends StatelessWidget {
           _foodVariantCard('Chocolate Doughnut', 'Chocolate-covered doughnut', 2.50, 'assets/chocolate doughnut.png'),
           _foodVariantCard('Sprinkled Doughnut', 'Doughnut with colorful sprinkles', 2.50, 'assets/sprinkled doughnut.png'),
         ];
-      case 'Cocktails':
+      case 'Hot Drinks':
+        return [
+          _foodVariantCard('Hot Chocolate', 'Rich hot chocolate', 3.00, 'assets/hot chocolate.png'),
+          _foodVariantCard('Chai Latte', 'Spiced chai latte', 3.50, 'assets/chai latte.png'),
+          _foodVariantCard('Cappuccino', 'Classic cappuccino', 3.50, 'assets/cappuccino.png'),
+          _foodVariantCard('Green Tea', 'Refreshing green tea', 2.50, 'assets/green tea.png'),
+          _foodVariantCard('Black Tea', 'Classic black tea', 2.50, 'assets/black tea.png'),
+          _foodVariantCard('Herbal Tea', 'Soothing herbal tea', 2.50, 'assets/herbal tea.png'),
+          _foodVariantCard('Espresso', 'Strong espresso coffee', 2.50, 'assets/espresso.png'),
+          _foodVariantCard('Americano', 'Classic americano', 2.50, 'assets/americano.png'),
+          _foodVariantCard('Latte', 'Smooth latte coffee', 3.00, 'assets/latte.png'),
+        ];
+        case 'Cocktails':
         return [
           _foodVariantCard('Mojito', 'Refreshing mint mojito', 7.99, 'assets/mojito.png'),
           _foodVariantCard('Pina Colada', 'Tropical pina colada', 8.50, 'assets/pina colada.png'),
@@ -216,24 +195,6 @@ class FoodDetailPage extends StatelessWidget {
           _foodVariantCard('Iced Latte', 'Smooth iced latte', 3.50, 'assets/iced latte.png'),
           _foodVariantCard('Iced Mocha', 'Rich iced mocha', 3.50, 'assets/iced mocha.png'),
           _foodVariantCard('Iced Americano', 'Bold iced americano', 3.50, 'assets/iced americano.png'),
-        ];
-      case 'Hot Tea':
-        return [
-          _foodVariantCard('Green Tea', 'Refreshing green tea', 2.50, 'assets/green tea.png'),
-          _foodVariantCard('Black Tea', 'Classic black tea', 2.50, 'assets/black tea.png'),
-          _foodVariantCard('Herbal Tea', 'Soothing herbal tea', 2.50, 'assets/herbal tea.png'),
-        ];
-      case 'Hot Drinks':
-        return [
-          _foodVariantCard('Hot Chocolate', 'Rich hot chocolate', 3.00, 'assets/hot chocolate.png'),
-          _foodVariantCard('Chai Latte', 'Spiced chai latte', 3.50, 'assets/chai latte.png'),
-          _foodVariantCard('Cappuccino', 'Classic cappuccino', 3.50, 'assets/cappuccino.png'),
-        ];
-      case 'Hot Coffee':
-        return [
-          _foodVariantCard('Espresso', 'Strong espresso coffee', 2.50, 'assets/espresso.png'),
-          _foodVariantCard('Americano', 'Classic americano', 2.50, 'assets/americano.png'),
-          _foodVariantCard('Latte', 'Smooth latte coffee', 3.00, 'assets/latte.png'),
         ];
       case 'Honey Mustard Chicken':
         return [
