@@ -47,7 +47,6 @@ class _FoodAppState extends State<FoodApp> {
       },
       theme: ThemeData(primarySwatch: Colors.purple),
       debugShowCheckedModeBanner: false,
-      //  home: FoodHomePage(),
     );
   }
 }
@@ -59,16 +58,72 @@ class FoodHomePage extends StatefulWidget {
 
 class _FoodHomePageState extends State<FoodHomePage> {
   int currentPageIndex = 0;
+  final TextEditingController _searchController = TextEditingController();
+  String searchQuery = '';
 
-  NavigationDestinationLabelBehavior labelBehavior =
-      NavigationDestinationLabelBehavior.onlyShowSelected;
+  Widget _foodVariantCard(String name, String description, double price, String imageUrl) {
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          children: [
+            Image.asset(imageUrl, height: 70, width: 70, fit: BoxFit.cover),
+            const SizedBox(width: 20),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
+                  Text(description),
+                  Text('\$${price.toStringAsFixed(2)}', style: const TextStyle(color: Colors.green)),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  Widget verticalFoodVariantList(List<FoodItem> items) {
+    if (items.isEmpty) {
+      return const Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Text("No matching items found."),
+      );
+    }
+
+
+    return Column(
+      children: items.map((item) {
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => FoodDetailPage(foodItem: item),
+              ),
+            );
+          },
+          child: _foodVariantCard(
+            item.name,
+            item.description,
+            item.price,
+            item.imageUrl,
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+
+  final PageController _pageController = PageController();
 
   void navigateToPage(int index) {
     setState(() {
       currentPageIndex = index;
     });
 
-    // Check if the Cart tab (index 1) is selected
     if (index == 1) {
       Navigator.push(
         context,
@@ -79,6 +134,7 @@ class _FoodHomePageState extends State<FoodHomePage> {
         });
       });
     }
+
     if (index == 2) {
       Navigator.pushNamed(context, '/profilepage').then((_) {
         setState(() {
@@ -138,55 +194,10 @@ class _FoodHomePageState extends State<FoodHomePage> {
       price: 18.99,
     ),
     FoodItem(
-      name: 'Shrimp',
-      imageUrl: 'assets/shrimp.png',
-      description: 'Succulent shrimp cooked with herbs',
-      price: 13.99,
-    ),
-    FoodItem(
       name: 'Pasta',
       imageUrl: 'assets/pasta.png',
       description: 'Creamy pasta with a blend of sauces',
       price: 11.99,
-    ),
-  ];
-
-  final List<FoodItem> appetizersItems = [
-    FoodItem(
-      name: 'Chicken Wings',
-      imageUrl: 'assets/chicken wings.png',
-      description: 'Crispy chicken wings tossed in sauce',
-      price: 7.99,
-    ),
-    FoodItem(
-      name: 'Onion Rings',
-      imageUrl: 'assets/onion rings.png',
-      description: 'Golden-fried onion rings',
-      price: 5.99,
-    ),
-    FoodItem(
-      name: 'Tacos',
-      imageUrl: 'assets/tacos.png',
-      description: 'Soft shell tacos filled with meat and toppings',
-      price: 6.99,
-    ),
-    FoodItem(
-      name: 'Spring Rolls',
-      imageUrl: 'assets/spring rolls.png',
-      description: 'Crispy spring rolls with dipping sauce',
-      price: 5.49,
-    ),
-    FoodItem(
-      name: 'Salad',
-      imageUrl: 'assets/salad.png',
-      description: 'Fresh garden salad with dressing',
-      price: 4.99,
-    ),
-    FoodItem(
-      name: 'Fries',
-      imageUrl: 'assets/fries.png',
-      description: 'Crispy french fries',
-      price: 3.99,
     ),
   ];
 
@@ -241,63 +252,48 @@ class _FoodHomePageState extends State<FoodHomePage> {
     ),
   ];
 
-  final List<FoodItem> coldBeveragesItems = [
+  final List<FoodItem> beveragesItems = [
     FoodItem(
-      name: 'Cocktails',
-      imageUrl: 'assets/cocktails.png',
-      description: 'Refreshing cocktails with a twist',
-      price: 5.50,
+      name: 'Hot Drinks',
+      imageUrl: 'assets/hd.png',
+      description: 'Variety of hot beverages',
+      price: 2.50,
     ),
     FoodItem(
       name: 'Soft Drinks',
-      imageUrl: 'assets/soft drinks.png',
+      imageUrl: 'assets/soda.png',
       description: 'Chilled soft drinks to quench your thirst',
       price: 2.50,
     ),
     FoodItem(
+      name: 'Iced Coffee',
+      imageUrl: 'assets/icedcof.png',
+      description: 'Iced coffee with a creamy finish',
+      price: 3.50,
+    ),
+    FoodItem(
       name: 'Iced Tea',
-      imageUrl: 'assets/iced tea.png',
+      imageUrl: 'assets/teas.png',
       description: 'Cool iced tea with lemon flavor',
       price: 3.00,
     ),
     FoodItem(
       name: 'Juices',
-      imageUrl: 'assets/juices.png',
+      imageUrl: 'assets/juic.png',
       description: 'Freshly squeezed juices',
       price: 4.00,
     ),
     FoodItem(
       name: 'Smoothies',
-      imageUrl: 'assets/smoothies.png',
+      imageUrl: 'assets/smooz.png',
       description: 'Healthy and delicious smoothies',
       price: 4.50,
     ),
     FoodItem(
-      name: 'Iced Coffee',
-      imageUrl: 'assets/iced coffee.png',
-      description: 'Iced coffee with a creamy finish',
-      price: 3.50,
-    ),
-  ];
-
-  final List<FoodItem> hotBeveragesItems = [
-    FoodItem(
-      name: 'Hot Tea',
-      imageUrl: 'assets/hot tea.png',
-      description: 'Soothing hot tea with a blend of herbs',
-      price: 2.50,
-    ),
-    FoodItem(
-      name: 'Hot Drinks',
-      imageUrl: 'assets/hot drinks.png',
-      description: 'Variety of hot beverages',
-      price: 2.50,
-    ),
-    FoodItem(
-      name: 'Hot Coffee',
-      imageUrl: 'assets/hot coffee.png',
-      description: 'Rich and aromatic hot coffee',
-      price: 3.00,
+      name: 'Cocktails',
+      imageUrl: 'assets/cockt.png',
+      description: 'Refreshing cocktails with a twist',
+      price: 5.50,
     ),
   ];
 
@@ -316,6 +312,26 @@ class _FoodHomePageState extends State<FoodHomePage> {
     ),
   ];
 
+  List<FoodItem> getAllItems() {
+    return [
+      ...mainCourseItems,
+      ...dessertsItems,
+      ...beveragesItems,
+      ...recommendedPlatesItems,
+    ];
+  }
+
+  List<FoodItem> filterItems(List<FoodItem> items, String searchQuery) {
+    if (searchQuery.isEmpty) return items;
+
+    return items.where((item) {
+      return item.name.toLowerCase().contains(searchQuery.toLowerCase()) ||
+          item.description.toLowerCase().contains(searchQuery.toLowerCase());
+    }).toList();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -329,18 +345,9 @@ class _FoodHomePageState extends State<FoodHomePage> {
           navigateToPage(index);
         },
         tabs: const [
-          GButton(
-            icon: Icons.home,
-            text: 'Home',
-          ),
-          GButton(
-            icon: Icons.shopping_cart_rounded,
-            text: 'Cart',
-          ),
-          GButton(
-            icon: Icons.person,
-            text: 'Account',
-          )
+          GButton(icon: Icons.home, text: 'Home'),
+          GButton(icon: Icons.shopping_cart_rounded, text: 'Cart'),
+          GButton(icon: Icons.person, text: 'Account')
         ],
       ),
       appBar: AppBar(
@@ -352,8 +359,7 @@ class _FoodHomePageState extends State<FoodHomePage> {
             child: Row(
               children: [
                 Container(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: Colors.purple[900]!,
                     borderRadius: BorderRadius.circular(12),
@@ -362,10 +368,7 @@ class _FoodHomePageState extends State<FoodHomePage> {
                     children: [
                       Icon(Icons.location_on, color: Colors.white),
                       SizedBox(width: 4),
-                      Text(
-                        'Cairo',
-                        style: TextStyle(fontSize: 16, color: Colors.white),
-                      ),
+                      Text('Cairo', style: TextStyle(fontSize: 16, color: Colors.white)),
                     ],
                   ),
                 ),
@@ -382,19 +385,28 @@ class _FoodHomePageState extends State<FoodHomePage> {
             children: [
               searchBar(),
               const SizedBox(height: 18),
-              promotionalBanner(),
-              sectionTitle("Select by category"),
-              foodList(mainCourseItems),
-              sectionTitle("Appetizers"),
-              foodList(appetizersItems),
-              sectionTitle("Desserts"),
-              foodList(dessertsItems),
-              sectionTitle("Cold Beverages"),
-              foodList(coldBeveragesItems),
-              sectionTitle("Hot Beverages"),
-              foodList(hotBeveragesItems),
-              sectionTitle("Recommended Plates"),
-              foodList(recommendedPlatesItems),
+              // Updated conditional structure for search results vs categories
+            if (searchQuery.isNotEmpty) ...[
+          sectionTitle("Search Results"),
+        verticalFoodVariantList(
+          getAllItems().where((item) =>
+          item.name.toLowerCase().contains(searchQuery) ||
+              item.description.toLowerCase().contains(searchQuery)
+          ).toList(),
+        ),
+        const SizedBox(height: 20),
+        ],
+              if (searchQuery.isEmpty) ...[
+                promotionalBanner(),
+                sectionTitle("Select by category"),
+                foodList(filterItems(mainCourseItems, searchQuery)),
+                sectionTitle("Desserts"),
+                foodList(filterItems(dessertsItems, searchQuery)),
+                sectionTitle("Beverages"),
+                foodList(filterItems(beveragesItems, searchQuery)),
+                sectionTitle("Recommended Plates"),
+                foodList(filterItems(recommendedPlatesItems, searchQuery)),
+              ],
             ],
           ),
         ),
@@ -408,8 +420,14 @@ class _FoodHomePageState extends State<FoodHomePage> {
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(12),
       ),
-      child: const TextField(
-        decoration: InputDecoration(
+      child: TextField(
+        controller: _searchController,
+        onChanged: (value) {
+          setState(() {
+            searchQuery = value.toLowerCase();
+          });
+        },
+        decoration: const InputDecoration(
           border: InputBorder.none,
           hintText: "What are you craving for?",
           hintStyle: TextStyle(color: Colors.black),
@@ -420,29 +438,24 @@ class _FoodHomePageState extends State<FoodHomePage> {
     );
   }
 
-  final PageController _pageController = PageController();
-
   Widget promotionalBanner() {
     return Column(
       children: [
         SizedBox(
-          height: 150, // Adjust based on your banner size
+          height: 150,
           child: PageView(
             controller: _pageController,
             children: [
-              singleBanner(
-                  "Check Out Our Chicken Dishes", "assets/comfortfood.png"),
-              singleBanner(
-                  "We’ve got your dessert cravings covered!", "assets/p2.png"),
-              singleBanner(
-                  "Don't miss our must-try cocktails!", "assets/p3.png"),
+              singleBanner("Check Out Our Chicken Dishes", "assets/comfortfood.png"),
+              singleBanner("We’ve got your dessert cravings covered!", "assets/p2.png"),
+              singleBanner("Don't miss our must-try cocktails!", "assets/p3.png"),
             ],
           ),
         ),
         const SizedBox(height: 10),
         SmoothPageIndicator(
           controller: _pageController,
-          count: 3, // Number of banners
+          count: 3,
           effect: ExpandingDotsEffect(
             dotHeight: 8,
             dotWidth: 8,
@@ -476,7 +489,6 @@ class _FoodHomePageState extends State<FoodHomePage> {
                     color: Colors.white,
                   ),
                 ),
-                const SizedBox(height: 2),
               ],
             ),
           ),
@@ -494,7 +506,6 @@ class _FoodHomePageState extends State<FoodHomePage> {
     );
   }
 
-
   Widget sectionTitle(String title) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -511,6 +522,13 @@ class _FoodHomePageState extends State<FoodHomePage> {
   }
 
   Widget foodList(List<FoodItem> items) {
+    if (items.isEmpty) {
+      return const Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Text("No matching items found."),
+      );
+    }
+
     return SizedBox(
       height: 140,
       child: ListView.builder(
@@ -529,25 +547,25 @@ class _FoodHomePageState extends State<FoodHomePage> {
             },
             child: Card(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16), // Smooth, rounded corners
+                borderRadius: BorderRadius.circular(16),
               ),
-              margin: const EdgeInsets.only(right: 10), // Adjust side margins
+              margin: const EdgeInsets.only(right: 10),
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0), // Reduce default extra spacing
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Column(
-                  mainAxisSize: MainAxisSize.min, // Prevents unwanted space
-                  crossAxisAlignment: CrossAxisAlignment.center, // Centers everything
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(16), // Rounded corners for image
+                      borderRadius: BorderRadius.circular(16),
                       child: Image.asset(
                         item.imageUrl,
-                        height: 100, // Adjusted to fit better
+                        height: 100,
                         width: 120,
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const SizedBox(height: 3), // Small spacing between image & text
+                    const SizedBox(height: 3),
                     Text(
                       item.name,
                       style: const TextStyle(
@@ -560,8 +578,6 @@ class _FoodHomePageState extends State<FoodHomePage> {
                 ),
               ),
             ),
-
-
           );
         },
       ),
