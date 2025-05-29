@@ -1,0 +1,74 @@
+
+import 'package:flutter/foundation.dart';
+import 'package:collection/collection.dart'; 
+
+class CartItem {
+  final String name;
+  final double price;
+  final String imageUrl; 
+  int quantity;
+
+  CartItem({required this.name, required this.price, required this.imageUrl, this.quantity = 1});
+
+  
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'price': price,
+      'imageUrl': imageUrl, 
+      'quantity': quantity,
+    };
+  }
+
+  factory CartItem.fromJson(Map<String, dynamic> json) {
+    return CartItem(
+      name: json['name'],
+      price: json['price'],
+      imageUrl: json['imageUrl'], 
+      quantity: json['quantity'],
+    );
+  }
+}
+
+class CartProvider extends ChangeNotifier {
+  final List<CartItem> _items = [];
+
+  List<CartItem> get items => List.unmodifiable(_items); 
+  void addItem(String name, double price, String imageUrl) {
+    final existingItem = _items.firstWhereOrNull((item) => item.name == name);
+
+    if (existingItem != null) {
+      existingItem.quantity++;
+    } else {
+      _items.add(CartItem(name: name, price: price, imageUrl: imageUrl)); 
+    }
+    notifyListeners();
+  }
+
+  void removeItem(String name) {
+    final existingItem = _items.firstWhereOrNull((item) => item.name == name);
+
+    if (existingItem != null) {
+      if (existingItem.quantity > 1) {
+        existingItem.quantity--;
+      } else {
+        _items.removeWhere((item) => item.name == name);
+      }
+      notifyListeners();
+    }
+  }
+
+  int getItemCount(String name) {
+    final existingItem = _items.firstWhereOrNull((item) => item.name == name);
+    return existingItem?.quantity ?? 0;
+  }
+
+  double get totalPrice {
+    return _items.fold(0.0, (sum, item) => sum + (item.price * item.quantity));
+  }
+
+  void clearCart() {
+    _items.clear();
+    notifyListeners();
+  }
+}
