@@ -17,8 +17,11 @@ import 'sign_up_screen.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => UserProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => UserProvider()),
+        ChangeNotifierProvider(create: (context) => CartProvider()), 
+      ],
       child: FoodApp(),
     ),
   );
